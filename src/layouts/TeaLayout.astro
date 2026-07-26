@@ -6,7 +6,7 @@ import Layout from './Layout.astro';
 const { frontmatter } = Astro.props;
 ---
 <Layout pageTitle={frontmatter.title} description={frontmatter.description} >
-    <section class="information-block">
+    <section class="information-block full-width">
         <ImageSlider images={frontmatter.sliderImages} />
         <div class="text-information"> 
             <div class="headerContainer">

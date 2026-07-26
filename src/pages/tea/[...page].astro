@@ -14,10 +14,14 @@ export const getStaticPaths = (async ({ paginate }) => {
   return paginate(posts, { pageSize: 10 });
 }) satisfies GetStaticPaths;
 
-const { page } = Astro.props;
+type Props = {
+	src: string;
+	page: any;
+}
 
+const { page } = Astro.props;
 const title = "Наші чаї";
-const description = "Тут представлені чаї та чайний посуд, якими ми можемо з вами поділитися.";
+const description = "Тут представлені чаї, якими ми можемо з вами поділитися.";
 const pageNumber = page.currentPage;
 ---
 
@@ -30,22 +34,16 @@ const pageNumber = page.currentPage;
     	{page.url.next && <a href={page.url.next} class="next-page-pagin">&#8594;</a>}
   	</div>
 
-	<section>
+	<section class="breakout">
 		<div class="tea-block">
-			{page.data.map((post) => (
+			{page.data.map((post: any) => (
 					<article class="container">
 						<a href={`/tea/${post.id}/`} data-astro-prefetch>
 							<figure class="tea">
-								<Image  
-									width={900}
-									height={450}
-									src={post.data.heroImage} 
-									alt={post.data.title}
-									class="tea-image" 
-								/>
+								<Image width={720} height={360} src={post.data.heroImage} alt="" />
 								<figcaption>
 									<h2>{post.data.title}</h2>
-									<p>{post.data.description}</p>
+									<p>{post.data.subtitle}</p>
 								</figcaption>
 							</figure>				
 						</a>
@@ -139,7 +137,6 @@ const pageNumber = page.currentPage;
 			display: grid;
 			grid-template-columns: repeat(2, 1fr);
 			gap: 2rem;
-			/* justify-content: space-between; */
 		}
 	}
 
@@ -147,7 +144,6 @@ const pageNumber = page.currentPage;
 
 	.category-btn > a {
       color: light-dark (var(--foreground), var(--foreground-dark));
-      /* padding: .3rem .5rem; */
       display: block;
     }
 
@@ -167,13 +163,16 @@ const pageNumber = page.currentPage;
     }
 
 	article {
-		/* container-type: inline-size; */
 		display: grid;
 		grid-template-rows: 1fr auto auto;
 		margin: 0;
 	}
 
-	.tea-image {
+	.container {
+		background-color: light-dark(var(--button), var(--foreground));
+	}
+
+	.tea > img {
 		aspect-ratio: 2 / 1;
 		border-radius: .9rem .9rem 0 0;
 		display: block;
@@ -252,14 +251,16 @@ const pageNumber = page.currentPage;
 		/* color code by category */
 		border-radius: 0.9rem;
 		--hue: 0;
-		border: 1px solid oklch(87% 0.1 var(--hue));
+		border: 1px solid gray;
 	}
 
 	.container:has([data-category="shengcha"]) { --hue: 112.44; }
 
 	.container:has([data-category="heicha"]) { --hue: 93.5; }
 
-	.container:has([data-category="hongcha"]) { --hue: 65; }
+	.container:has([data-category="hongcha"]) { 
+		--hue: 18;
+	}
 
 	.container:has([data-category="baicha&lucha"]) { --hue: 146.65; }
 

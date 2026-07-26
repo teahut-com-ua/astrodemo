@@ -10,7 +10,6 @@ pubDate: 2025-12-15
 item: 10 гр
 price: 4.24
 heroImage: "/src/assets/tea/2025-lincang-dianhong/2025-lincang-dianhong.jpg"
-imageAlt: Дяньхон з диких дерев Да Хей Шань
 sliderImages: [
     {
         src: "/src/assets/tea/2025-lincang-dianhong/slide1.jpg",

@@ -18,7 +18,6 @@ const articles = defineCollection({
 			pubDate: z.coerce.date(),
 			postedDate: z.coerce.date().optional(),
 			heroImage: z.optional(image()),
-			ogImageUrl: z.string().optional(),
 			category: z.object({
 				title: z.string(),
 				url: z.string().optional(),
@@ -41,7 +40,6 @@ const brewingtips = defineCollection({
 			pubDate: z.coerce.date(),
 			postedDate: z.coerce.date().optional(),
 			heroImage: z.optional(image()),
-			ogImageUrl: z.string().optional(),
 			category: z.object({
 				title: z.string(),
 				url: z.string().optional(),
@@ -64,7 +62,6 @@ const gongfuteapot = defineCollection({
 			pubDate: z.coerce.date(),
 			postedDate: z.coerce.date().optional(),
 			heroImage: z.optional(image()),
-			ogImageUrl: z.string().optional(),
 			category: z.object({
 				title: z.string(),
 				url: z.string().optional(),
@@ -88,7 +85,6 @@ const questionsandanswers = defineCollection({
 			pubDate: z.coerce.date(),
 			postedDate: z.coerce.date().optional(),
 			heroImage: z.optional(image()),
-			ogImageUrl: z.string().optional(),
 			category: z.object({
 				title: z.string(),
 				url: z.string().optional(),
@@ -111,7 +107,6 @@ const tea = defineCollection({
 			item: z.string().optional(),
       		price: z.number(),
 			heroImage: z.optional(image()),
-			imageAlt: z.string().optional(),
 			sliderImages: z.array(z.object({
 				src: z.string(),
 				alt: z.string().optional(),
@@ -134,10 +129,10 @@ const teaware = defineCollection({
 		pubDate: z.coerce.date(),
 		madeIn: z.string().optional(),
 		region: z.string().optional(),
+		variety: z.string().optional(),
 		item: z.string().optional(),
 		price: z.number(),
-		heroImage: image(),
-		imageAlt: z.string().optional(),
+		heroImage: z.optional(image()),
 		sliderImages: z.array(z.object({
 			src: z.string(),
 			alt: z.string().optional(),

@@ -8,7 +8,7 @@ import PageFind from "./PageFind.astro";
 const { title = "Майстерня" } = Astro.props;
 ---
 
-<header class="main-header" {title}>
+<header class="main-header" {title} >
 	<a href="/">
 		<Image class="logo" src={logo} alt="Logo" />
 	</a>
@@ -26,29 +26,25 @@ const { title = "Майстерня" } = Astro.props;
 						ХАТИНКА
 					</HeaderLink>
 				</li>
-				<li>
-					<ul>
-						<li>
-							<a href="">
-								- наша Традиція
-							</a>
-						</li>
-						<li>
-							<a href="">
-								- керівні засади цієї Хатинки
-							</a>
-						</li>
-						<li>
-							<a href="">
-								- про нас
-							</a>
-						</li>
-						<li>
-							<a href="">
-								- про нашу крамничку
-							</a>
-						</li>
-					</ul>
+				<li class="sublink">
+					<HeaderLink href="/our-tradition">
+						- наша Традиція
+					</HeaderLink>
+				</li>
+				<li class="sublink">
+					<HeaderLink href="/guiding-principles-of-this-hut">
+						- керівні засади цієї Хатинки
+					</HeaderLink>
+				</li>
+				<li class="sublink">
+					<HeaderLink href="/about">
+						- про нас
+					</HeaderLink>
+				</li>
+				<li class="sublink">
+					<HeaderLink href="/about-our-teashop">
+						- про нашу крамничку
+					</HeaderLink>
 				</li>
 			</ul>
 		</div>
@@ -59,51 +55,48 @@ const { title = "Майстерня" } = Astro.props;
 			<ul>
 				<li>
 					<HeaderLink href="/tea">
-						ЧАЙ І НАЧИННЯ
+						НАШІ ЧАЇ
+					</HeaderLink>
+				</li>
+				<li class="sublink">
+					<HeaderLink class="menu-link" href='/categories/shengcha'>
+						- шен пуери
+					</HeaderLink>
+				</li>
+				<li class="sublink">
+					<HeaderLink class="menu-link" href='/categories/heicha'>
+						- шу пуери й хейча
+					</HeaderLink>
+				</li>
+				<li class="sublink">
+					<HeaderLink class="menu-link" href='/categories/hongcha'>
+						- червоні чаї
+					</HeaderLink>
+				</li>
+				<li class="sublink">
+					<HeaderLink class="menu-link" href='/categories/wulong&gaba'>
+						- вулони й ґаба
+					</HeaderLink>
+				</li>
+				<li class="sublink">
+					<HeaderLink class="menu-link" href='/categories/baicha&lucha'>
+						- білі й зелені
+					</HeaderLink>
+				</li>
+				<li class="sublink">
+					<HeaderLink class="menu-link" href='/categories/japanese'>
+						- японські
 					</HeaderLink>
 				</li>
 				<li>
-					<ul>
-						<li>
-							<a class="menu-link" href='/categories/shengcha/'>
-								- шен пуери
-							</a>
-						</li>
-						<li>
-							<a class="menu-link" href='/categories/heicha/'>
-								- шу пуери й хейча
-							</a>
-						</li>
-						<li>
-							<a class="menu-link" href='/categories/hongcha/'>
-								- червоні чаї
-							</a>
-						</li>
-						<li>
-							<a class="menu-link" href='/categories/wulong&gaba/'>
-								- вулони й ґаба
-							</a>
-						</li>
-						<li>
-							<a class="menu-link" href='/categories/baicha&lucha/'>
-								- білі й зелені
-							</a>
-						</li>
-						<li>
-							<a class="menu-link" href='/categories/japanese/'>
-								- японські
-							</a>
-						</li>
-						<li>
-							<a class="menu-link teas" href='/teawares'>
-								- чайне начиння
-							</a>
-						</li>
-					</ul>
+					<HeaderLink class="" href='/teaware'>
+						ЧАЙНЕ НАЧИННЯ
+					</HeaderLink>
+				</li>
 				<li>
-					<a class="menu-link" href='/tags/'>
+					<HeaderLink class="menu-link" href='/tags'>
 						Позначки чаїв
-					</a>
+					</HeaderLink>
 				</li>
 			</ul>
 		</div>
@@ -117,34 +110,30 @@ const { title = "Майстерня" } = Astro.props;
 						ЧИТАЛЬНЯ
 					</HeaderLink>
 				</li>
-				<li>
-					<ul>
-						<li>
-							<a class="menu-link" href='/library/gongfuchatips/'>
-								- поради з ґонфу ча
-							</a>
-						</li>
-						<li>
-							<a class="menu-link" href='/library/gongfuteapot/'>
-								- чайник ґонфу
-							</a>
-						</li>
-						<li>
-							<a class="menu-link" href='/library/brewingtips/'>
-								- поради щодо заварювання
-							</a>
-						</li>
-						<li>
-							<a class="menu-link" href='/library/teaandseasons/'>
-								- про чай і сезони
-							</a>
-						</li>
-						<li>
-							<a class="menu-link" href='/library/questionsandanswers/'>
-								- питання і відповіді
-							</a>
-						</li>
-					</ul>
+				<li class="sublink">
+					<HeaderLink class="menu-link" href='/articles/gongfuchatips'>
+						- поради з ґонфу ча
+					</HeaderLink>
+				</li>
+				<li class="sublink">
+					<HeaderLink class="menu-link" href='/articles/gongfuteapot'>
+						- чайник ґонфу
+					</HeaderLink>
+				</li>
+				<li class="sublink">
+					<HeaderLink class="menu-link" href='/articles/brewingtips'>
+						- поради щодо заварювання
+					</HeaderLink>
+				</li>
+				<li class="sublink">
+					<HeaderLink class="menu-link" href='/articles/teaandseasons'>
+						- про чай і сезони
+					</HeaderLink>
+				</li>
+				<li class="sublink">
+					<HeaderLink class="menu-link" href='/articles/questionsandanswers'>
+						- питання і відповіді
+					</HeaderLink>
 				</li>
 			</ul>
 		</div>
@@ -277,8 +266,6 @@ const { title = "Майстерня" } = Astro.props;
 			color: light-dark(var(--foreground), var(--active));
 		}
 
-		}
-
 		ul {
 			list-style: none;
 			padding: 1rem;
@@ -286,6 +273,10 @@ const { title = "Майстерня" } = Astro.props;
 
         li {
             padding-left: 1rem;
+
+			&.sublink {
+				margin-left: 1rem;
+			}
         }
 
         li:has(a.active) {
@@ -296,6 +287,8 @@ const { title = "Майстерня" } = Astro.props;
 			border-radius: 9px;
             color: light-dark(var(--active), var(--background));
         }
+
+	}
 
 	[popover] {
 		translate: -360px 0;

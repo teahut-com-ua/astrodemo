@@ -11,28 +11,30 @@ const { frontmatter } = Astro.props;
 
 <Layout title={frontmatter.category.title} >
 	<article>
-		<div class="hero-image">
+		<!-- <div class="hero-image">
 			{frontmatter.heroImage && <Image src={frontmatter.heroImage} alt="" />}
-		</div>
+		</div> -->
 		<div class="prose">
 			<div class="title">
 				<h1>{frontmatter.title}</h1>
 				<h3 class="last-line">{frontmatter.subtitle}</h3>
 				<h5 class="author">{frontmatter.author}</h5>
 				<div class="date">
-					<FormattedMonth date={frontmatter.pubDate} />
-						{
-							frontmatter.postedDate && (
-								<div class="last-updated-on">
-									Викладено<FormattedDate date={frontmatter.postedDate} />
-										</div>
-							)
-						}
+					<p style="text-align: end; font-style: italic;">
+						<FormattedMonth date={frontmatter.pubDate} />
+					</p>
 				</div>
 				<hr />
 			</div>
 			<slot />
 			<p class="bottom-sign">Українською перекладено спеціяльно для TeaHut.com.ua</p>
+						{
+							frontmatter.postedDate && (
+								<div class="last-updated-on">
+									Викладено на сайті <FormattedDate date={frontmatter.postedDate} />
+										</div>
+							)
+						}
         	<div class="last-line" style="display: flex; justify-content: end;">
             	<Image style="display: block;  width: 70px; border: unset;" src={img1} alt="Чайник і чашка" />
         	</div>
@@ -74,7 +76,7 @@ const { frontmatter } = Astro.props;
 	}
 	.author {
 		font-style: italic;
-		margin-bottom: 1.5rem;
+		margin-bottom: 1rem;
 		text-align: end;
 	}
 	.date {
@@ -83,13 +85,14 @@ const { frontmatter } = Astro.props;
 		color: rgb(var(--gray));
 	}
 	.last-updated-on {
-		margin-top: 1rem;
+		text-align: end;
+		font-size: 0.9rem;
 		font-style: italic;
 	}
 	.bottom-sign {
         font-size: 0.9rem;
         font-style: italic;
         text-align: right;
-        margin-top: 0.3rem;
+        margin: 0.3rem 0 0;
     }
 </style>

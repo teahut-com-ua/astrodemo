@@ -1,0 +1,306 @@
+---
+import { Image } from 'astro:assets';
+import type { GetStaticPaths } from "astro";
+import { getCollection } from 'astro:content';
+import FormattedMonth from '../../components/FormattedMonth.astro';
+import { exchangePrice } from '../../utils';
+import Layout from '../../layouts/Layout.astro';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection('teaware'))
+    .filter((post) => post.data.posted !== false)
+    .sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf(),
+  );
+  return paginate(posts, { pageSize: 10 });
+}) satisfies GetStaticPaths;
+
+type Props = {
+	src: string;
+	page: any;
+}
+
+const { page } = Astro.props;
+
+const title = "Чайне начиння";
+const description = "Тут представлене чайне начиння, яким ми можемо з вами поділитися.";
+const pageNumber = page.currentPage;
+---
+
+<Layout {title} {description} >
+    <h1 class="page-title">{title}</h1>
+	<p class="page-description">{description}</p>
+	<div class="pagination-block">
+    	{page.url.prev && <a href={page.url.prev} class="prev-page-pagin">&#8592;</a>}
+    	<p class="page-number">сторінка {pageNumber}</p>
+    	{page.url.next && <a href={page.url.next} class="next-page-pagin">&#8594;</a>}
+  	</div>
+
+	<section class="breakout">
+		<div class="tea-block">
+			{page.data.map((post: any) => (
+				<article class="container">
+						<a href={`/teaware/${post.id}/`} data-astro-prefetch>
+							<figure class="tea">
+								<Image class="tea-image" width={720} height={360} src={post.data.heroImage} alt="" />
+								<figcaption>
+									<h2>{post.data.title}</h2>
+									<p>{post.data.subtitle}</p>
+								</figcaption>
+							</figure>				
+						</a>
+						<div class="price-block">
+							<date class="pub-date">
+								Додано:
+								<span>
+								<FormattedMonth date={post.data.pubDate} />
+								</span>
+							</date>
+							<p class="price-row"><span class="price">{exchangePrice(post.data.price)}</span>&#8372; / {post.data.item}</p>
+						</div>
+						<a href={`/categories/${post.data.category}/`} class="categories" data-category={post.data.category}></a>
+				</article>
+			))}
+		</div>
+	</section>
+
+    <div class="pagination-block">
+    {page.url.prev && <a href={page.url.prev} class="prev-page-pagin">&#8592;</a>}
+    <p class="page-number">сторінка {page.currentPage}</p>
+    {page.url.next && <a href={page.url.next} class="next-page-pagin">&#8594;</a>}
+  </div>
+</Layout>
+
+<style>
+	main {
+		width: 90ch;
+	}
+	.page-title {
+		display: none;
+
+		@media (min-width: 45rem) {
+			display: block;
+			text-align: center;
+			margin-bottom: 2rem;
+		}
+	}
+	.page-description {
+		font-size: 1rem;
+		font-style: italic;
+		text-align: end;
+		text-wrap: balance;
+		margin: 0 0 3rem;
+		
+	}
+	.pagination-block {
+		display: grid; 
+		grid-template-columns: 1fr auto 1fr;
+			grid-template-areas: "prev page next";
+		justify-content: center; 
+		gap: 3rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.prev-page-pagin {
+	  grid-area: prev;
+	  width: fit-content;
+	  justify-self: end;
+	}
+
+	.next-page-pagin {
+	  grid-area: next;
+	  width: fit-content;
+	  justify-self: start;
+	}
+
+	.page-number {
+	  color: light-dark(var(--green), var(--active));
+	  text-align: center;
+	  grid-area: page;
+	  margin-bottom: unset;
+	}
+	
+	.pagination-block > a {
+		padding: 0.2rem 0.5rem 0.1rem;
+		border: 1px solid light-dark(var(--foreground), var(--foreground-dark));
+		border-radius: 0.5rem;
+		font-size: 0.9rem;
+		color: light-dark(var(--foreground), var(--foreground-dark));
+	}
+
+	section .tea-block {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 2em;
+		place-content: start center;
+		margin-bottom: 2rem;
+
+		@media (min-width: 45rem) {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 2rem;
+		}
+	}
+
+	.tea-block article { width: 100%; }
+
+	.category-btn > a {
+      color: light-dark (var(--foreground), var(--foreground-dark));
+      display: block;
+    }
+
+	.categories-btn {
+		margin-top: 1rem;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+    }
+  
+    .category-btn {
+		margin: 0.25em;
+		border: dotted 1px #7c7c7c;
+		border-radius: .5em;
+		font-size: 1.1rem;
+		background-color: var(--button);
+    }
+
+	article {
+		display: grid;
+		grid-template-rows: 1fr auto auto;
+		margin: 0;
+	}
+
+	.tea-image {
+		aspect-ratio: 2 / 1;
+		border-radius: .9rem .9rem 0 0;
+		border: none;
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		margin-bottom: 1em;
+	}
+
+	figcaption h2 {
+		color: light-dark(var(--foreground), oklch(84% 0.06 94));
+		font-size: clamp(0.75rem, 9cqw, 1.2rem);
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		line-height: 1.1;
+		margin: clamp(0.8rem, 2cqw, 0.375rem) 0;
+		text-align: center;
+	}
+
+	figcaption p {
+		color: oklch(57.18% 0.093 108.52);
+		font-size: 1rem;
+		text-align: center;
+		text-wrap: balance;
+		margin: 0 .5rem;
+	}
+
+	.price-block {
+		font-size: clamp(.7rem, 9cqw, 1rem);
+		padding: 0 1rem;
+		display: flex;
+		justify-content: space-around;
+		align-items: baseline;
+	}
+
+	.pub-date {
+		font-size: .8rem;
+	}
+
+	.pub-date span {
+		margin-left: .3rem;
+	}
+
+	.price-row {
+		font-size: .8rem;
+		margin-bottom: unset;
+		justify-self: end;
+	}
+
+	.price {
+        margin: 0 .2rem;
+        font-size: clamp(1rem, 9cqw, 1.5rem);
+        font-weight: 500;
+        color: oklch(59% 0.19 144.27);
+    }
+
+	.categories {
+		background: oklch(95% 0.05 150);
+		color: contrast-color(oklch(95% 0.05 150));
+		border-radius: 0 0 .8rem .8rem;
+		display: block;
+		font-size: clamp(0.5rem, 5.5cqw, 0.825rem);
+		letter-spacing: 0.15em;
+		line-height: 1;
+		margin: 0;
+		padding: clamp(0.125rem, 2cqw, 0.25rem);
+		font-variant: small-caps;
+		text-align: center;
+	}
+
+	article .categories::after {
+		content: "чайне начиння";
+	}
+
+	.container{
+		/* color code by category */
+		border-radius: 0.9rem;
+		--hue: 0;
+		/* border: 1px solid oklch(95% 0.1 150); */
+		border: 1px solid var(--button);
+		background-color: light-dark(var(--button), var(--foreground));
+	}
+
+	@media (min-width: 45rem) {
+		.tea-block > article:first-child {
+			/* width: 100%; */
+		}
+		.category-btn > a:hover, .category-btn > a:focus-visible {
+			color: light-dark(var(--background), var(--background-dark));
+			background-color: var(--active);
+			border-radius: 0.5rem;
+		}
+
+		/* .tea-block article { width: calc(50% - 1rem); } */
+
+		.tea-block article * { transition: 0.2s ease; }
+
+		.container {
+			transition: all 0.3s ease-in-out;
+
+			& .container {
+				display: grid;
+				grid-template-rows: subgrid;
+				grid-row: span 3;
+			}
+		}
+
+		article:hover {
+			transform: scale(1.05);
+		}
+
+		.boxes {
+			flex-direction: row;
+			justify-content: flex-start;
+		}
+
+		.price-block {
+			padding: 0;
+			justify-content: space-around;
+		}
+
+		.pub-date { font-size: .9rem; }
+
+		.price-row { font-size: .9rem; }
+
+        .pagination-block { margin-bottom: 2rem; }
+
+		.pagination-block > a:hover {
+			color: var(--active);
+			border: 1px solid var(--active);
+		}
+	}
+</style>

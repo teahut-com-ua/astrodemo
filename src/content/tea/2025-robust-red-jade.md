@@ -10,7 +10,6 @@ pubDate: 2026-01-15
 item: 10 гр
 price: 4.05
 heroImage: "/src/assets/tea/2025-robust-red-jade/2025-robust-red-jade.jpg"
-imageAlt: Дужий Рубіновий, тайванський Червоний 2025 року
 sliderImages: [
     {
         src: "/src/assets/tea/2025-robust-red-jade/slide1.jpg",

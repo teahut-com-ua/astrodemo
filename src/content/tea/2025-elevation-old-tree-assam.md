@@ -32,7 +32,6 @@ sliderImages: [
     },
 ]
 heroImage: "/src/assets/tea/2025-elevation-old-tree-assam/elevation-old-tree-assam.jpg"
-imageAlt: Піднесення, тайванський Червоний 2025 року
 category: ["hongcha"]
 tags: ["Червоні", "Тайванські Червоні"]
 ---
