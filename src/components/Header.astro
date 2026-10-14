@@ -138,7 +138,7 @@ const { title = "Майстерня" } = Astro.props;
 			</ul>
 		</div>
 	</nav>
-	<div class="theme-picker">
+	<div class="search-button">
 		<PageFind />
 	</div>
 </header>
@@ -146,7 +146,7 @@ const { title = "Майстерня" } = Astro.props;
 <style>	
 	header.main-header {
 		grid-area: header;
-		margin: 0 0 2rem;
+		margin: 0 0 1rem;
 		padding: 0.5em 0.7em;
 		display: flex;
 		align-items: center;
@@ -155,7 +155,7 @@ const { title = "Майстерня" } = Astro.props;
 		box-shadow:  0px 2px 8px rgba(0,0,0, 0.5);
 
 		@media (min-width: 720px) {
-			margin: 0;
+			margin: 0 0 2rem;
 			padding: 0;
 			height: 100svh;
 			display: grid;
@@ -164,7 +164,7 @@ const { title = "Майстерня" } = Astro.props;
 			grid-template-areas: 
 			"logo"
 			"menu"
-			"theme-picker";
+			"search-button";
 			justify-items: center;
 			position: fixed;
 		}
@@ -304,9 +304,12 @@ const { title = "Майстерня" } = Astro.props;
             translate: -360px 0;
         }
 	}
-	.theme-picker {
-		grid-area: theme-picker;
+	.search-button {
 		display: grid;
 		place-content: center;
+		
+		@media (min-width: 720px) {
+			grid-area: search-button;
+		}
 	}
 </style>

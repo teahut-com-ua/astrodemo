@@ -31,7 +31,7 @@ const { images } = Astro.props;
 		border: unset;
 	}
 	.carousel {
-		margin: 0 auto 3em;
+		margin: 0 auto 4em;
 		width: 100%;
 		display: flex;
 		gap: 1em;
@@ -58,54 +58,28 @@ const { images } = Astro.props;
 			flex: 0 0 100%;
 			accent-color: grey;
 			scroll-snap-align: start;
-			/* padding: 1em; */
 		}
 	}
 
 	.carousel::-webkit-scrollbar { display: none; }
 
-	.carousel::scroll-button(*) {
-		position: absolute;
-		position-anchor: --carousel;
-		align-self: anchor-center;
-		font-size: 1.2rem;
-		height: 2rem;
-		width: 2rem;
-		border-radius: 100vw;
-		border: none;
-		cursor: pointer;
-	}
-
-	.carousel::scroll-button(*):hover,
-	.carousel::scroll-button(*):focus-visible {
-		opacity: 100%;
-	}
-
-	.carousel::scroll-button(left) {
-		content: "◄";
-		padding-left: 2px;
-		right: calc(anchor(left) - 60px);
-	}
-
-	.carousel::scroll-button(right) {
-		content: "►";
-		padding-right: 2px;
-		left: calc(anchor(right) - 60px);
-	}
-
+	
 	.slide-image {
 		max-width: 100%;
-		border-radius: 0.5em 0.5em 0 0;
+
+		@media (min-width: 720px){
+			border-radius: 0.5em 0.5em 0 0;
+		}
 	}
 
 	.carousel::scroll-marker-group {
-		position: absolute;
 		display: flex;
 		justify-content: center;
-		position-anchor: --carousel;
-		gap: 1rem;
-		top: calc(anchor(bottom) + 15px);
 		justify-self: anchor-center;
+		gap: 1rem;
+		position: absolute;
+		position-anchor: --carousel;
+		top: calc(anchor(bottom) + 5px);
 	}
 
 
@@ -127,12 +101,43 @@ const { images } = Astro.props;
 	}
 
     figcaption {
-        text-align: center;
+		text-align: center;
 		font-size: 1rem;
 		color: #e2dbbe;
 		background: rgba(0, 0, 2, 0.7);
 		padding: .3rem 0;
 		margin: 0;
 		white-space: normal;
+	}
+	
+	@media (min-width: 720px){
+		.carousel::scroll-button(*) {
+			border: none;
+			font-size: 1.2rem;
+			width: 2rem;
+			height: 2rem;
+			border-radius: 100vw;
+			position: fixed;
+			position-anchor: --carousel;
+			top: calc(anchor(center) - 2rem);
+			cursor: pointer;
+		}
+	
+		.carousel::scroll-button(*):hover,
+		.carousel::scroll-button(*):focus-visible {
+			opacity: 100%;
+		}
+	
+		.carousel::scroll-button(left) {
+			content: "◄";
+			padding-left: 2px;
+			right: calc(anchor(left) - 60px);
+		}
+	
+		.carousel::scroll-button(right) {
+			content: "►";
+			padding-right: 2px;
+			left: calc(anchor(right) - 60px);
+		}
 	}
 </style>

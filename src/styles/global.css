@@ -50,7 +50,7 @@
 	--gray-light: rgb(211, 204, 175);
 	--gray-dark: 34, 41, 57;
 	--gray-op: rgba(110, 103, 82, 0.507);
-	--brown: oklch(49.626% 0.13164 49.491);
+	--brown: hsl(27, 99%, 31%);
 	--brown-dark: oklch(24.056% 0.05763 57.884);
 	--button: oklch(72.18% 0.093 108.52 / 52%);
 	--button-noop: oklch(72.18% 0.093 108.52);
@@ -60,9 +60,18 @@
 	--gray-gradient: rgba(var(--gray-light), 50%), var(--background);
     --primary-background: light-dark(var(--background-light), var(--background-dark));
 	--primary-color: light-dark(var(--foreground), var(--foreground-dark));
+	--shengcha: oklch(74.478% 0.15179 65.878);
+	--heicha: oklch(27.034% 0.09235 26.637);
+	--hongcha: oklch(56.119% 0.15414 47.429);
+	--wulong: oklch(73.308% 0.12164 194.866);
+	--lucha: oklch(87.014% 0.19702 136.983);
+	--baicha: oklch(86.962% 0.0756 85.119);
+	--japanese: oklch(74.03% 0.24622 141.959);
 	--box-shadow:
 		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
 		0 16px 32px rgba(var(--gray), 33%);
+
+	--step-2: clamp(1rem, calc(0.5rem + 3vi), 3.25rem);
 }
 @font-face {
 	font-family: "Gabriela";
@@ -96,7 +105,7 @@ body {
 	text-align: left;
     word-wrap: break-word;
 	overflow-wrap: break-word;
-    font-size: clamp(1rem, 0.7rem + 0.7vw, 1.375rem);
+    font-size: clamp(1rem, calc(0.7rem + 0.7vw), 1.375rem);
 	line-height: 1.7;
     min-block-size: 100svh;
     display: grid;
@@ -118,7 +127,7 @@ body {
     }
 }
 main {
-    max-width: calc(100% - 2em);
+	max-width: 100%;
 	margin: auto;
 	padding-bottom: 1.5rem;
 	grid-area: main;
@@ -195,8 +204,7 @@ img {
 	display: block;
 	max-width: 100%;
 	height: auto;
-	border-radius: 0.5rem;
-	/* border: 1px solid rgb(var(--gray)); */
+	/* border-radius: 0.5rem; */
 }
 img.float-left {
     margin: 1rem auto 1.5rem;
@@ -219,7 +227,15 @@ img.float-right {
 	}
 }
 img.align-center {
-	margin: 1rem auto 1.5rem;
+	margin: 1.5rem auto;
+}
+figure {
+	margin: 0 auto 1.5rem;
+}
+figcaption {
+	font-size: 0.9rem;
+	text-align: center;
+	text-wrap: balance;
 }
 .first-line {
     margin-top: 3rem;
@@ -242,7 +258,7 @@ img.align-center {
 	}
 }
 .go-up {
-	padding: 1rem 2rem;
+	padding: 1rem 2rem 2.5rem;
 	font-style: italic;
 	text-align: end;
 }
@@ -266,7 +282,13 @@ blockquote {
 }
 .article-footer {
 	font-size: 0.9rem;
+	font-style: italic;
 	margin-top: 3rem;
+}
+.bottom-kettle-image {
+	margin: 1rem 0;
+	display: flex;
+	justify-content: end;
 }
 hr {
 	border: none;
@@ -276,6 +298,9 @@ dialog {
 	margin: auto;
 }
 button.question-button {
+  width: 1.5rem;
+  aspect-ratio: 1;
+  color: rgb(0, 60, 0);
   padding: 3px;
   background-color: var(--background-light);
   border: 1px solid rgb(78, 78, 78);
@@ -292,32 +317,32 @@ button.close-button {
 	justify-self: end;
 }
 .modal {
-  display: none;
-  width: min(540px, 90vw);
-  border: none;
-  border-radius: 1rem;
-  padding: 20px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  translate: 0 50px;
-  transition: opacity, display, translate;
-  transition-behavior: allow-discrete;
-  transition-duration: 600ms;
+	inline-size: min(90vw, 540px);
+	border: none;
+	border-radius: 1rem;
+	padding: 1.25rem;
+	box-shadow: 0 1.25rem 3.25rem rgba(0, 0, 0, 0.2);
+	opacity: 0;
+	translate: 0 1.25rem;
+	transition: all 0.3s ease-in-out;
+	transition-behavior: allow-discrete;
 
-  &::backdrop {
-    backdrop-filter: blur(3px);
-  }
-}
-.modal[open] {
-	background-color: light-dark(rgb(252, 236, 215), var(--footer));
-  display: grid;
-  opacity: 1;
-  translate: 0 0;
+	&::backdrop {
+		background: rgba(0, 0, 0, 0.3);
+		backdrop-filter: blur(3px);
+	}
 
-  @starting-style {
-    opacity: 0;
-    translate: 0 -50px;
-  }
+	&[open] {
+		background-color: light-dark(rgb(252, 236, 215), rgb(67, 71, 57));
+		display: grid;
+		opacity: 1;
+		translate: 0 0;
+	
+		@starting-style {
+			opacity: 0;
+			transform: translateY(-20px) scale(.95);
+		}
+	}
 }
 .sr-only {
 	border: 0;
@@ -337,6 +362,29 @@ button.close-button {
 	white-space: nowrap;
 }
 
+/* Scroll-driven page progress */
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  height: 0.25rem;
+  transform-origin: left;
+  background: rgb(226, 42, 42);
+  animation: page-progress linear;
+  animation-timeline: scroll();
+}
+
+@keyframes page-progress {
+  from { scale: 0 1; }
+  to { scale: 1 1; }
+}
+
 @view-transition {
 	navigation: auto;
+}
+
+.question {
+	margin: 1rem 0 1.5rem;
+	font-style: italic;
+	text-wrap: unset; 
 }

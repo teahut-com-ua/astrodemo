@@ -14,7 +14,6 @@ const articles = defineCollection({
 			subsubtitle: z.string().optional(),
 			author: z.string().optional(),
 			description: z.string(),
-			// Transform string to Date object
 			pubDate: z.coerce.date(),
 			postedDate: z.coerce.date().optional(),
 			heroImage: z.optional(image()),
@@ -81,7 +80,6 @@ const questionsandanswers = defineCollection({
 			questions: z.array(z.string()).optional(),
 			author: z.string().optional(),
 			description: z.string(),
-			// Transform string to Date object
 			pubDate: z.coerce.date(),
 			postedDate: z.coerce.date().optional(),
 			heroImage: z.optional(image()),
@@ -111,10 +109,10 @@ const tea = defineCollection({
 				src: z.string(),
 				alt: z.string().optional(),
 			})),
-			// Transform string to Date object
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
 			category: z.array(z.string()),
+			color: z.string(),
       		tags: z.array(z.string())
 		}),
 });

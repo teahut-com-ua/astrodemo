@@ -1,0 +1,69 @@
+---
+import { Icon } from "astro-icon/components";
+import Layout from "../layouts/Layout.astro";
+
+const pageTitle = "404 | Сторінку не знайдено";
+---
+
+<Layout {pageTitle}>
+    <section class="container">
+        <h1 class="number last">404</h1>
+        <a href="/" class="last">
+            <button class="home-btn">
+                Вертайтесь домів
+                <Icon name="hut" size={27} />
+            </button>
+        </a>
+        <h3 class="centered">Ви вступили в Потік,</h3>
+        <h3 class="centered">Але він вже не той, що раніше.</h3>
+        <h3 class="centered last">Так і цяя сторінка спливла разом з ним...</h3>
+    </section>
+</Layout>
+
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .centered {
+        text-align: center;
+    }
+
+    .home-btn {
+        display: flex;
+        justify-content: center;
+        column-gap: 1rem;
+        align-items: center;
+        padding: 0.5rem 1rem 0.6rem;
+        width: fit-content;
+        border-radius: .6rem;
+        cursor: pointer;
+        font-size: 1rem;
+        color: light-dark(var(--foreground), var(--green));
+        background-color: light-dark(var(--button), var(--gray));
+    }
+
+    .number {
+        font-size: 6rem;
+        margin: 4rem auto 1rem;
+    }
+
+    .home-btn:hover {
+        color: light-dark(var(--active),var(--background));
+    }
+
+    .last {
+        padding-bottom: 3.8rem;
+    }
+
+    @media(min-width: 48rem) {
+        .number {
+        margin: 0 auto 1rem;
+        }
+
+        .last {
+            padding-bottom: 1.2rem;
+        }
+    }
+</style>

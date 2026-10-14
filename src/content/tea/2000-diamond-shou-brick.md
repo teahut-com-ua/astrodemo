@@ -6,9 +6,9 @@ description: '"Діамант", витримана цеглинка Шу пуе�
 region: Менхай, Юньнань
 variety: вікові пуерні дерева
 yieldYear: 2000 рік
-pubDate: 2026-07-11
+pubDate: 2026-09-28
 item: 10 гр
-price: 3.95
+price: 3.91
 sliderImages: [
     {
         src: "/src/assets/tea/2000-diamond-shou-brick/slide1.jpg",
@@ -34,6 +34,7 @@ sliderImages: [
 heroImage: "/src/assets/tea/2000-diamond-shou-brick/2000-diamond-shou-brick.jpg"
 imageAlt: Діамант, цеглинка Шу 2000 року
 category: ["heicha"]
+color: "oklch(27.034% 0.09235 26.637)"
 tags: ["Шу Пуери", "Витримані", "Чаї з дерев"]
 ---
 

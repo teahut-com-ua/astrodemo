@@ -11,9 +11,9 @@ const { frontmatter } = Astro.props;
 
 <Layout title={frontmatter.category.title} >
 	<article>
-		<!-- <div class="hero-image">
+		<div class="hero-image">
 			{frontmatter.heroImage && <Image src={frontmatter.heroImage} alt="" />}
-		</div> -->
+		</div>
 		<div class="prose">
 			<div class="title">
 				<h1>{frontmatter.title}</h1>
@@ -35,8 +35,8 @@ const { frontmatter } = Astro.props;
 										</div>
 							)
 						}
-        	<div class="last-line" style="display: flex; justify-content: end;">
-            	<Image style="display: block;  width: 70px; border: unset;" src={img1} alt="Чайник і чашка" />
+        	<div class="bottom-kettle-image">
+            	<Image style="display: block;  width: 90px; border: unset;" src={img1} alt="Чайник і чашка" />
         	</div>
 		</div>
 	</article>

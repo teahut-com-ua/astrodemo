@@ -1,0 +1,64 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const allTeas = await getCollection("tea");
+  const uniqueTags = [...new Set(allTeas.map((tea) => tea.data.tags).flat())];
+
+  return uniqueTags.map((tag) => {
+    const filteredTeas = allTeas.filter((t) => t.data.tags.includes(tag) && t.data.posted !== false);
+    return {
+      params: { tag },
+      props: { teas: filteredTeas },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { teas } = Astro.props;
+---
+
+<Layout pageTitle={tag}>
+  <h3 class="header">Чаї, позначені як <span>"{tag}"</span>:</h3>
+  <section>
+      {teas.map((t) => 
+        <a href={`/tea/${t.id}`} data-astro-prefetch>
+          <div class="container">
+            <Image
+              src={t.data.heroImage} 
+              alt=""
+              class="tea-image" 
+            />
+            <div class="information">
+              <h5 class="title">{t.data.title}</h5>
+            </div>
+            <p class="categories" data-category={t.data.category}></p>
+          </div>
+        </a>
+        // <TeaCard image={t.data.heroImage} url={`/tea/${t.id}`} title={t.data.title} subtitle={t.data.subtitle} category={t.data.category} />
+      )}
+  </section>
+</Layout>
+
+<style>
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  section {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 2em;
+		margin-bottom: 2rem;
+	}
+  
+  @media(min-width: 48rem) {    
+    section {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 1fr;
+    }
+  }
+</style>

@@ -37,7 +37,10 @@ const pageNumber = page.currentPage;
 	<section class="breakout">
 		<div class="tea-block">
 			{page.data.map((post: any) => (
-					<article class="container">
+					<article 
+						class="container" 
+						data-color={post.data.color}
+					>
 						<a href={`/tea/${post.id}/`} data-astro-prefetch>
 							<figure class="tea">
 								<Image width={720} height={360} src={post.data.heroImage} alt="" />
@@ -56,7 +59,9 @@ const pageNumber = page.currentPage;
 							</date>
 							<p class="price-row"><span class="price">{exchangePrice(post.data.price)}</span>&#8372; / {post.data.item}</p>
 						</div>
-						<a href={`/categories/${post.data.category}/`} class="categories" data-category={post.data.category}></a>
+						<a href={`/categories/${post.data.category}/`} class="categories" 
+						data-color={post.data.color}
+						data-category={post.data.category}></a>
 				</article>
 			))}
 		</div>
@@ -172,6 +177,10 @@ const pageNumber = page.currentPage;
 		background-color: light-dark(var(--button), var(--foreground));
 	}
 
+	figure.tea {
+		margin: 0 0 1rem;
+	}
+
 	.tea > img {
 		aspect-ratio: 2 / 1;
 		border-radius: .9rem .9rem 0 0;
@@ -229,9 +238,9 @@ const pageNumber = page.currentPage;
         color: oklch(59% 0.19 144.27);
     }
 
-	.categories {
-		background: oklch(87% 0.05 var(--hue));
-		color: oklch(35% 0.104 var(--hue));
+	article .categories {
+		background: attr(data-color type(<color>));
+		color: contrast-color(attr(data-color type(<color>)));
 		border-radius: 0 0 .8rem .8rem;
 		display: block;
 		font-size: clamp(0.5rem, 5.5cqw, 0.825rem);
@@ -248,42 +257,17 @@ const pageNumber = page.currentPage;
 	}
 
 	.container{
-		/* color code by category */
 		border-radius: 0.9rem;
-		--hue: 0;
-		border: 1px solid gray;
-	}
-
-	.container:has([data-category="shengcha"]) { --hue: 112.44; }
-
-	.container:has([data-category="heicha"]) { --hue: 93.5; }
-
-	.container:has([data-category="hongcha"]) { 
-		--hue: 18;
-	}
-
-	.container:has([data-category="baicha&lucha"]) { --hue: 146.65; }
-
-	.container:has([data-category="wulong&gaba"]) { --hue: 167.82; }
-
-	.container:has([data-category="japanese"]) { --hue: 143.21; }
-
-	article .categories {
-		background: oklch(87% 0.09 var(--hue));
-		color: oklch(60% 0.104 var(--hue));
+		border: 1px solid attr(data-color type(<color>));
+		border-color: attr(data-color type(<color>));
 	}
 
 	@media (min-width: 45rem) {
-		.tea-block > article:first-child {
-			/* width: 100%; */
-		}
 		.category-btn > a:hover, .category-btn > a:focus-visible {
 			color: light-dark(var(--background), var(--background-dark));
 			background-color: var(--active);
 			border-radius: 0.5rem;
 		}
-
-		/* .tea-block article { width: calc(50% - 1rem); } */
 
 		.tea-block article * { transition: 0.2s ease; }
 

@@ -34,6 +34,7 @@ sliderImages: [
 heroImage: "/src/assets/tea/2024-hong-shui-GABA/2024-hong-shui-GABA.jpg"
 imageAlt: ҐАБА з Джу Шань
 category: ["wulong&gaba"]
+color: "oklch(73.308% 0.12164 194.866)"
 tags: ["ҐАБА", "Чаї з кущів"]
 ---
 

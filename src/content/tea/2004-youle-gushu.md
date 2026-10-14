@@ -34,6 +34,7 @@ sliderImages: [
 heroImage: "/src/assets/tea/2004-youle-gushu/2004-youle-gushu.jpg"
 imageAlt: Млинець 2004 року з Йовле
 category: ["shengcha"]
+color: "oklch(74.478% 0.15179 65.878)"
 tags: ["Шен Пуери", "Витримані", "Ґу Шу", "Чаї з дерев"]
 ---
 

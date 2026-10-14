@@ -1,8 +1,8 @@
 ---
 posted: true
 title: '"Піднесення"'
-subtitle: Старі дерева Асаму, висота ~800м.
-description: Тайванський Червоний чай з озера Сонця та Місяця
+subtitle: Старі дерева Асаму
+description: Тайванський Червоний чай з озера Сонця та Місяця; висота ~800м.
 region: Юйчі, округа Наньтов
 variety: вікові чайні дерева
 yieldYear: літо 2025 року
@@ -33,6 +33,7 @@ sliderImages: [
 ]
 heroImage: "/src/assets/tea/2025-elevation-old-tree-assam/elevation-old-tree-assam.jpg"
 category: ["hongcha"]
+color: "oklch(56.119% 0.15414 47.429)"
 tags: ["Червоні", "Тайванські Червоні"]
 ---
 

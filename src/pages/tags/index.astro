@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content";
+import Layout from '../../layouts/Layout.astro';
+
+const allTeas = await getCollection("tea")
+const filteredTeas = allTeas.filter((tea) => tea.data.posted !== false);
+const tags = [...new Set(filteredTeas.map((tea) => tea.data.tags).flat())];
+const pageTitle = "Позначки чаїв";
+---
+
+<Layout {pageTitle}>
+    <h1>{pageTitle}:</h1>
+      <div class="tags last-line">
+          {tags.map((tag) => (
+              <p class="tag"><a href={`/tags/${tag}/`}>{tag}</a></p>
+          ))}
+      </div>
+</Layout>
+
+<style>
+    a {
+      color: light-dark (var(--foreground), var(--foreground-dark));
+      padding: .3rem .5rem;
+      display: block;
+    }
+  
+    .tags {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  
+    .tag {
+      margin: 0.25em;
+      border: dotted 1px #7c7c7c;
+      border-radius: .5em;
+      font-size: 1.1rem;
+      background-color: var(--button);
+    }
+
+    a:hover, a:focus-visible { color: light-dark(var(--background), var(--background-dark));}
+
+    .tag:hover,
+    a:focus-visible { background-color: var(--active); }
+</style>

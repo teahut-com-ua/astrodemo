@@ -34,6 +34,7 @@ sliderImages: [
 heroImage: "/src/assets/tea/1990s-liubao/1990s-liubao.jpg"
 imageAlt: Витриманий Любао 1990х
 category: ["heicha"]
+color: "oklch(27.034% 0.09235 26.637)"
 tags: ["Любао", "Витримані", "Гонконзька витримка"]
 ---
 
