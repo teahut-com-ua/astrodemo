@@ -118,7 +118,7 @@ body {
 	
     @media (min-width: 45rem) {
 		grid-template-rows: 1fr auto;
-		grid-template-columns: 5rem 1fr;
+		grid-template-columns: 4.5rem 1fr;
 		grid-template-areas: 
 		"header main"
 		"header footer";

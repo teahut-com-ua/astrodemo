@@ -146,7 +146,7 @@ const { title = "Майстерня" } = Astro.props;
 <style>	
 	header.main-header {
 		grid-area: header;
-		margin: 0 0 1rem;
+		margin: 0 0 2rem;
 		padding: 0.5em 0.7em;
 		display: flex;
 		align-items: center;
@@ -159,8 +159,8 @@ const { title = "Майстерня" } = Astro.props;
 			padding: 0;
 			height: 100svh;
 			display: grid;
-			grid-template-columns: 5rem;
-			grid-template-rows: 5rem 1fr 5rem;
+			grid-template-columns: 4.5rem;
+			grid-template-rows: 4.5rem 1fr 4.5rem;
 			grid-template-areas: 
 			"logo"
 			"menu"
@@ -173,13 +173,18 @@ const { title = "Майстерня" } = Astro.props;
 	.logo {
 		grid-area: logo;
 		display: block;
-		width: 4rem;
+		width: 2.75rem;
         max-width: 100%;
         aspect-ratio: 1 / 1;
-		padding: 0.3rem;
+		padding: 0.1rem;
 		background-color: oklch(85% 0.063 96.44);
 		border-radius: 100vw;
 		border: 1px solid rgb(var(--black));
+
+		@media (min-width: 720px) {
+			width: 3.5rem;
+			padding: 0.3rem;
+		}
 	}
 	h2.header-menu-title {
 		margin: 0;
